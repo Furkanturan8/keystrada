@@ -1,5 +1,7 @@
 # Keystrada — Yapay Zeka Destekli Mülk ve Kiracı Yönetim Platformu
 
+(https://keystrada.vercel.app)
+
 Emlak yönetim şirketlerinin ve mülk sahiplerinin kiracı takibi, kira sözleşmeleri, tahsilat,
 bakım talepleri ve kira dekontu eşleştirme süreçlerini **tek bir panelden** yönetmesini sağlayan
 uçtan uca bir SaaS platformu.
