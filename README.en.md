@@ -130,38 +130,38 @@ appointment calendar on a single screen.
 
 ```
                          ┌───────────────────────────────┐
-   Visitor      ─────────▶│                                │
-                         │             Nginx               │
-   Admin/Agent  ─────────▶│      reverse proxy · SSL       │
-   Tenant       ─────────▶│                                │
-                         └───────────────┬────────────────┘
+   Visitor      ────────▶│                               │
+                         │             Nginx             │
+   Admin/Agent  ────────▶│      reverse proxy · SSL      │
+   Tenant       ────────▶│                               │
+                         └───────────────┬───────────────┘
                                          │
                           ┌──────────────▼───────────────┐
-                          │           Frontend             │
-                          │      Next.js (App Router)      │
-                          │  (public) · (auth) · (app)     │
-                          │  JWT-based auth · RBAC guards  │
-                          │  route-group middleware         │
+                          │           Frontend           │
+                          │      Next.js (App Router)    │
+                          │  (public) · (auth) · (app)   │
+                          │  JWT-based auth · RBAC guards│
+                          │  route-group middleware      │
                           └──────────────┬───────────────┘
                                          │ REST API (JSON/JWT)
                           ┌──────────────▼───────────────┐
-                          │      Backend (Django + DRF)    │
-                          │   Role/Permission · JWT auth   │
-                          └───┬───────────────────────┬────┘
+                          │      Backend (Django + DRF)  │
+                          │   Role/Permission · JWT auth │
+                          └───┬────────────────────────┬─┘
                               │                        │
                    ┌──────────▼─────────┐   ┌──────────▼──────────┐
                    │    PostgreSQL      │   │  Celery + Redis     │
                    │  property·tenant·  │   │  automatic rent     │
-                   │  lease·finance     │   │  debiting            │
+                   │  lease·finance     │   │  debiting           │
                    └────────────────────┘   │  receipt processing │
-                                             │  queue                │
-                                             └──────────┬──────────┘
+                                            │  queue              │
+                                            └───────────┬─────────┘
                                                         │
                                              ┌──────────▼──────────┐
                                              │   NLP/OCR Module    │
                                              │  BERT · NER · Fuzzy │
                                              │  Matching · OCR     │
-                                             └──────────────────────┘
+                                             └─────────────────────┘
 ```
 
 **Data model summary:** Properties link to tenants through a `Lease`; each lease is automatically
