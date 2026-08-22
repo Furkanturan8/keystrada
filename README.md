@@ -128,39 +128,39 @@ Gelir özeti, aktif sözleşme sayısı, bekleyen ödeme, bakım durumu ve rande
 ## Mimari
 
 ```
-                         ┌───────────────────────────────┐
+                         ┌────────────────────────────────┐
    Ziyaretçi   ─────────▶│                                │
                          │           Nginx                │
    Admin/Emlakçı ───────▶│      reverse proxy · SSL       │
-   Kiracı       ─────────▶│                                │
+   Kiracı       ────────▶│                                │
                          └───────────────┬────────────────┘
                                          │
-                          ┌──────────────▼───────────────┐
-                          │         Frontend               │
-                          │      Next.js (App Router)      │
-                          │  (public) · (auth) · (app)     │
-                          │  JWT tabanlı auth · RBAC guard  │
-                          │  route-group middleware         │
-                          └──────────────┬───────────────┘
+                          ┌──────────────▼────────────────┐
+                          │         Frontend              │
+                          │      Next.js (App Router)     │
+                          │  (public) · (auth) · (app)    │
+                          │  JWT tabanlı auth · RBAC guard│
+                          │  route-group middleware       │
+                          └──────────────┬────────────────┘
                                          │ REST API (JSON/JWT)
-                          ┌──────────────▼───────────────┐
+                          ┌──────────────▼─────────────────┐
                           │      Backend (Django + DRF)    │
                           │   Role/Permission · JWT auth   │
-                          └───┬───────────────────────┬────┘
+                          └───┬────────────────────────┬───┘
                               │                        │
                    ┌──────────▼─────────┐   ┌──────────▼──────────┐
                    │    PostgreSQL      │   │  Celery + Redis     │
                    │  mülk·kiracı·      │   │  otomatik kira      │
                    │  sözleşme·finans   │   │  borçlandırma       │
                    └────────────────────┘   │  dekont işleme      │
-                                             │  kuyruğu             │
-                                             └──────────┬──────────┘
-                                                        │
-                                             ┌──────────▼──────────┐
+                                            │  kuyruğu            │
+                                            └──────────┬──────────┘
+                                                       │
+                                             ┌─────────▼───────────┐
                                              │   NLP/OCR Modülü    │
                                              │  BERT · NER · Fuzzy │
                                              │  Matching · OCR     │
-                                             └──────────────────────┘
+                                             └─────────────────────┘
 ```
 
 **Veri modelinin özeti:** Mülkler kiracılarla `Lease` (kira sözleşmesi) üzerinden ilişkilenir;
